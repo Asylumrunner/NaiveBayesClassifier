@@ -40,6 +40,18 @@ This is a formula composed of very easily obtained information. P(C) is just the
 
 This statement produces a likelihood, technically. It's still a measurement of the mathematical chances of a given class label being true, but all possible class labels' probabilities should sum to 1, to satisfy the basic laws of probability (after all, a training instance has to have *some* class label). However, were we to calculate this quantity for every class label and sum them, we'd get some random number. To get probabilities, we could just divide each likelihood by the sum of all likelihoods. The final answer is the same.
 
+## The Code In Action
+
+So, this implementation of this algorithm relies heavily on an OO framework. We have a single massive object called the Problem Space, which contains information encompassing all of the instances, including the total number of training instances, the total number of instances of each class, and the names of the classes. 
+
+Contained within the Problem Space is a list of Attribute objects, each representing a single attribute measured in each instance. Attributes have names, and they themselves contain a list of AttValue objects, each representing a value that said Attribute can take on. These AttValues have names and a list of what are called "class constitutions". Essentially, these are the number of instances of a given class which have this particular value for this particular attribute. 
+
+For example, if we have 100 instances of the class "person", and we have an attribute called "eye color" with an AttValue called "blue", the class_constitution[person] of that AttValue is simply the number of observed people with blue eyes.
+
+The algorithm begins by going over the training instances and using the data to construct the Problem Space, Attributes, and AttValues. These three things in concert form our model.
+
+When it comes time to classify, all of the various numbers needed to calculate likelihoods and probabilities are contained within the Problem Space, and are easily called upon.
+
 ## To-Do List:
 
 * Allow the classifier to operate on .txt, .csv, and .json files. File type can be determined with regex, at which point the file name will be passed to distinct functions for processing. Depending on implementation, a class-based/interface-based set of services might save me some time.
