@@ -48,9 +48,9 @@ Contained within the Problem Space is a list of Attribute objects, each represen
 
 For example, if we have 100 instances of the class "person", and we have an attribute called "eye color" with an AttValue called "blue", the class_constitution[person] of that AttValue is simply the number of observed people with blue eyes.
 
-The algorithm begins by going over the training instances and using the data to construct the Problem Space, Attributes, and AttValues. These three things in concert form our model.
+The algorithm begins by going over the training instances and using the data to construct the Problem Space, Attributes, and AttValues. These three things in concert form our model. It reads the first line of the training file, which is expected to be a set of attribute headers, and uses those to build every Attribute object it will need. As the program processes training instances, if it comes across an AttValue or a class it doesn't recognize, it will dynamically add it to the Problem Space.
 
-When it comes time to classify, all of the various numbers needed to calculate likelihoods and probabilities are contained within the Problem Space, and are easily called upon.
+When it comes time to classify, all of the various numbers needed to calculate likelihoods and probabilities are contained within the Problem Space, and are easily called upon. We just look at every attribute value of the testing instance, use our training data to construct the P(X|C)P(Y|C)P(Z|C)P(C)-like equation needed to calculate the likelihood of a given class, do that for every class, then assign the instance the class with the highest likelihood.
 
 ## To-Do List:
 
